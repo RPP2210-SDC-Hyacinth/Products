@@ -1,0 +1,27 @@
+{
+  "name": "products",
+  "version": "1.0.0",
+  "description": "Products_API",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/RPP2210-SDC-Hyacinth/Products.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/RPP2210-SDC-Hyacinth/Products/issues"
+  },
+  "homepage": "https://github.com/RPP2210-SDC-Hyacinth/Products#readme",
+  "dependencies": {
+    "axios": "^1.3.5",
+    "dotenv": "^16.0.3",
+    "eslint": "^8.38.0",
+    "express": "^4.18.2",
+    "jest": "^29.5.0",
+    "nodemon": "^2.0.22"
+  }
+}
