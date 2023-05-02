@@ -4,7 +4,9 @@
   "description": "Products_API",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "restartdb": "psql -U alvino -f ./server/database/Schemas/PostgresSQLSchema.sql",
+    "filldb": "node ./server/database/Schemas/PostgresScript.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +29,8 @@
     "pg": "^8.10.0"
   },
   "devDependencies": {
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0",
     "typescript": "^5.0.4"
   }
 }
