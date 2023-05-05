@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "restartdb": "psql -U alvino -f ./server/database/Schemas/PostgresSQLSchema.sql",
-    "filldb": "node ./server/database/Schemas/PostgresScript.js"
+    "updatecsv": "node ./csv.js"
   },
   "repository": {
     "type": "git",

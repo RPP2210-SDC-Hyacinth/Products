@@ -85,12 +85,21 @@ CREATE TABLE Related (
   PRIMARY KEY (id)
 );
 
-\copy Products FROM '/home/alvino/sdc_data/product.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
-\copy Features FROM '/home/alvino/sdc_data/features.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
-\copy Styles FROM '/home/alvino/sdc_data/styles.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true, NULL 'null');
-\copy SKUs FROM '/home/alvino/sdc_data/skus.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
-\copy Photos FROM '/home/alvino/sdc_data/photos.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
-\copy Characteristics FROM '/home/alvino/sdc_data/characteristics.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
-\copy Cart FROM '/home/alvino/sdc_data/cart.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
-\copy Related FROM '/home/alvino/sdc_data/related.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true, NULL '0');
+\copy Products FROM '/home/alvino/Desktop/hackreactor/SDC/Products_API/Products/data/sdc_data/product.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
+\copy Features FROM '/home/alvino/Desktop/hackreactor/SDC/Products_API/Products/data/sdc_data/features.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
+\copy Styles FROM '/home/alvino/Desktop/hackreactor/SDC/Products_API/Products/data/sdc_data/styles.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true, NULL 'null');
+\copy SKUs FROM '/home/alvino/Desktop/hackreactor/SDC/Products_API/Products/data/sdc_data/skus.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
+\copy Photos FROM '/home/alvino/Desktop/hackreactor/SDC/Products_API/Products/data/sdc_data/photos.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
+\copy Characteristics FROM '/home/alvino/Desktop/hackreactor/SDC/Products_API/Products/data/sdc_data/characteristics.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
+\copy Cart FROM '/home/alvino/Desktop/hackreactor/SDC/Products_API/Products/data/sdc_data/cart.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
+\copy Related FROM '/home/alvino/Desktop/hackreactor/SDC/Products_API/Products/data/sdc_data/transformed_related.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true, NULL 'null');
+
+-- \copy Products FROM '/home/alvino/sdc_data/product.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
+-- \copy Features FROM '/home/alvino/sdc_data/features.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
+-- \copy Styles FROM '/home/alvino/sdc_data/styles.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true, NULL 'null');
+-- \copy SKUs FROM '/home/alvino/sdc_data/skus.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
+-- \copy Photos FROM '/home/alvino/sdc_data/photos.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
+-- \copy Characteristics FROM '/home/alvino/sdc_data/characteristics.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
+-- \copy Cart FROM '/home/alvino/sdc_data/cart.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true);
+-- \copy Related FROM '/home/alvino/sdc_data/related.csv' WITH (FORMAT CSV, DELIMITER ',', HEADER true, NULL '0');
 
