@@ -1,7 +1,13 @@
-const parser = require('csv-parser');
-const writer = require('csv-writer').createObjectCsvWriter;
-const fs = require('fs')
-const path = require('path');
+
+import parser from 'csv-parser';
+import { createObjectCsvWriter as writer } from 'csv-writer';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
+import url from 'url';
+import path from 'path';
+
+const filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(filename);
 
 const rows = [];
 
