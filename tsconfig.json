@@ -1,5 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es2017"
+    "target": "es2017",
+    "module": "commonjs",
+    "types": ["node", "express"],
+    "outDir": "./dist",
+    "esModuleInterop": true,
+    "strict": true
   }
 }

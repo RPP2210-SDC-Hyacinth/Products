@@ -1,15 +1,16 @@
-const express = requrie('express');
+const express = require('express');
+const axios = require('axios');
+const path = require('path');
+const dotenv = require('dotenv');
+const ProductRoute = require('../dist/routes/Product.js');
 const app = express();
-require('dotenv').config({path: '../.env'});
-const port = 3000;
-const ProductRoute = require('./routes/Product.js');
 
-
+dotenv.config({path: '../.env'});
 
 app.use('/products', ProductRoute);
 
-app.listen(port, () => {
-  console.log(`Server running on port ${port}`);
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on port ${process.env.PORT}`);
 });
 
 

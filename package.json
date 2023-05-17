@@ -2,10 +2,11 @@
   "name": "products",
   "version": "1.0.0",
   "description": "Products_API",
-  "type": "module",
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "start": "nodemon ./server/index.js",
+    "build": "tsc --build",
     "restartdb": "psql -U alvino -f ./server/database/Schemas/PostgresSQLSchema.sql",
     "updatecsv": "node ./csv.js"
   },
@@ -30,6 +31,9 @@
     "pg": "^8.10.0"
   },
   "devDependencies": {
+    "@types/dotenv": "^8.2.0",
+    "@types/express": "^4.17.17",
+    "@types/pg": "^8.6.6",
     "csv-parser": "^3.0.0",
     "csv-writer": "^1.6.0",
     "typescript": "^5.0.4"
