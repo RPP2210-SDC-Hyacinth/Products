@@ -53,12 +53,53 @@ router.get('/:product_id', async (req: Request, res: Response) => {
   }
 });
 
-router.get('/:product_id/styles', (req: Request, res: Response) => {
-  console.log('product')
+interface Skus {
+  [key: string]: {
+    quantity: number,
+    size: string
+  }
+}
+
+interface Photos {
+  thumbnail_url: string,
+  url: string
+}
+
+interface Styles {
+  style_id: string,
+  name: string,
+  original_price: string,
+  sale_price: string,
+  'defult?': boolean,
+  photos: Photos[],
+  skus: Skus[]
+}
+
+interface ProductStyles {
+  product_id: string,
+  results: Styles[]
+}
+
+router.get('/:product_id/styles', async (req: Request, res: Response) => {
+  console.log('productStyles')
+  try {
+    let data = await query.getStyles(req.params.product_id);
+    res.send(data);
+    console.log(data);
+  } catch(error) {
+    res.send(error);
+    console.log('Error retrieving styles:', error)
+  }
 });
 
-router.get('/:product_id/related', (req: Request, res: Response) => {
-  console.log('product')
+router.get('/:product_id/related', async (req: Request, res: Response) => {
+  console.log('related');
+  try {
+    let data = await query.getRelatedProducts(req.params.product_id);
+    res.send(data);
+  } catch(error) {
+    console.log('Error retrieving related product');
+  }
 });
 
 module.exports = router

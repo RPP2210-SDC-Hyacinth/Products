@@ -64,6 +64,7 @@ const getOneProduct = async (id: number) => {
 
 const getStyles = async (id: number) => {
   try {
+    console.log(id);
     let query =
     `SELECT s.id AS style_id,
     s.name,
@@ -71,22 +72,32 @@ const getStyles = async (id: number) => {
     s.sale_price,
     s.default_style,
       json_agg(json_build_object('thumbnail_url', p.thumbnail_url, 'url', p.url)) AS photos,
-      json_object_agg(sk.size, json_build_object('quantity', sk.quantity, 'size', sk.size)) AS skus
+      json_object_agg(sk.id, json_build_object('quantity', sk.quantity, 'size', sk.size)) AS skus
     FROM Styles s
     LEFT JOIN SKUs sk ON s.id = sk.styleId
     LEFT JOIN Photos p ON s.id = p.styleId
     WHERE s.product_id = $1
+      AND sk.size IS NOT NULL
     GROUP BY s.id;`;
 
-    let result = await pool.query(query);
+    let result = await pool.query(query, [id]);
     return result;
   } catch(error) {
-    console.log('Unable to retrieve product' );
+    console.log('Unable to retrieve style due to this error:', error );
   }
 };
 
 const getRelatedProducts = async (id: number) => {
-
+  try {
+    let query =
+    `SELECT json_agg(related_product_id)
+    FROM Related r
+    WHERE current_product_id = $1;`;
+    let result = await pool.query(query, [id]);
+    return result;
+  } catch(error) {
+    console.log('Unable to retrieve relate products due to this error:', error);
+  }
 };
 
 module.exports = {
