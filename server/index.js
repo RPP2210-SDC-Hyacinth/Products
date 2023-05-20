@@ -7,6 +7,9 @@ const app = express();
 
 dotenv.config({path: '../.env'});
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use('/products', ProductRoute);
 
 app.listen(process.env.PORT, () => {
