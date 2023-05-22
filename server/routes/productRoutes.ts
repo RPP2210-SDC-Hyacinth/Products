@@ -2,7 +2,7 @@ import { Response, Request } from 'express';
 const express = require('express');
 const axios = require('axios');
 const router = express.Router();
-const query = require('../controller/query');
+const ProductsController = require('../controller/ProductsController');
 
 interface Products {
   id: number,
@@ -14,12 +14,10 @@ interface Products {
 }
 
 router.get('/', async (req: Request, res: Response) => {
-  console.log('product')
+  console.log('products api handler')
   try {
-    let data = await query.getProducts();
-    let products: Products[] = data.rows;
-    // console.log(products);
-    res.send(products)
+    let data = await ProductsController.products();
+    res.send(data)
   } catch(error: any) {
     let errorMessage = `Unable to retrieve products due to some internal error:, ${error}`
     res.status(500).send(errorMessage);
@@ -43,12 +41,11 @@ interface OneProduct {
 
 router.get('/:product_id', async (req: Request, res: Response) => {
   try {
-    let data = await query.getOneProduct(req.params.product_id);
+    let data = await ProductsController.oneProduct(req.params.product_id);
     let product: OneProduct = data.rows;
-    console.log(product)
-    res.send(req.params.product_id);
+    res.send(product);
   } catch (error: any) {
-    let errorMessage = `Unable to retrieve products due to some internal error:, ${error}`
+    let errorMessage = `Unable to retrieve product due to some internal error:, ${error}`
     res.status(500).send(errorMessage);
   }
 });
@@ -83,22 +80,23 @@ interface ProductStyles {
 router.get('/:product_id/styles', async (req: Request, res: Response) => {
   console.log('productStyles')
   try {
-    let data = await query.getStyles(req.params.product_id);
-    res.send(data);
-    console.log(data);
+    let data = await ProductsController.styles(req.params.product_id);
+    let styles: ProductStyles = data.rows;
+    res.send(styles);
   } catch(error) {
-    res.send(error);
-    console.log('Error retrieving styles:', error)
+    let errorMessage = `Unable to retrieve product's styles due to some internal error:, ${error}`
+    res.status(500).send(error);
   }
 });
 
 router.get('/:product_id/related', async (req: Request, res: Response) => {
   console.log('related');
   try {
-    let data = await query.getRelatedProducts(req.params.product_id);
-    res.send(data);
+    let data = await ProductsController.related(req.params.product_id);
+    res.send(data.rows);
   } catch(error) {
-    console.log('Error retrieving related product');
+    let errorMessage = `Unable to retrieve related proucts due to some internal error:, ${error}`
+    res.status(500).send(error);
   }
 });
 

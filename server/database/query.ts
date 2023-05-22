@@ -29,7 +29,7 @@ const pool = new Pool(poolConfig);
 
 const getProducts = async () => {
   try {
-    console.log('trying to query')
+    console.log('trying new query')
     let result = await pool.query('SELECT * FROM products');
     return result;
   } catch (error: any) {
