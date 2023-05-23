@@ -25,19 +25,6 @@ const products = async () => {
   }
 }
 
-// router.get('/', async (req: Request, res: Response) => {
-//   console.log('product')
-//   try {
-//     let data = await query.getProducts();
-//     let products: Products[] = data.rows;
-//     console.log(products);
-//     res.send(products)
-//   } catch(error: any) {
-//     let errorMessage = `Unable to retrieve products due to some internal error:, ${error}`
-//     res.status(500).send(errorMessage);
-//   }
-// });
-
 interface Features {
   feature: string,
   value: string
@@ -65,18 +52,6 @@ const oneProduct = async (product_id: number) => {
     return errorMessage;
   }
 }
-
-// router.get('/:product_id', async (req: Request, res: Response) => {
-//   try {
-//     let data = await query.getOneProduct(req.params.product_id);
-//     let product: OneProduct = data.rows;
-//     console.log(product)
-//     res.send(product);
-//   } catch (error: any) {
-//     let errorMessage = `Unable to retrieve products due to some internal error:, ${error}`
-//     res.status(500).send(errorMessage);
-//   }
-// });
 
 interface Skus {
   [key: string]: {
@@ -117,19 +92,6 @@ const styles = async (product_id: number) => {
   }
 }
 
-// router.get('/:product_id/styles', async (req: Request, res: Response) => {
-//   console.log('productStyles')
-//   try {
-//     let data = await query.getStyles(req.params.product_id);
-//     let styles: ProductStyles = data.rows;
-//     console.log(styles);
-//     res.send(styles);
-//   } catch(error) {
-//     res.send(error);
-//     console.log('Error retrieving styles:', error)
-//   }
-// });
-
 const related = async (product_id: number) => {
   try {
     let data = await query.getRelatedProducts(product_id);
@@ -139,16 +101,6 @@ const related = async (product_id: number) => {
     console.log('Error retrieving related product');
   }
 }
-
-// router.get('/:product_id/related', async (req: Request, res: Response) => {
-//   console.log('related');
-//   try {
-//     let data = await query.getRelatedProducts(req.params.product_id);
-//     res.send(data.rows);
-//   } catch(error) {
-//     console.log('Error retrieving related product');
-//   }
-// });
 
 module.exports = {
   products,
