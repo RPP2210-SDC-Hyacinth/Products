@@ -14,8 +14,8 @@ interface Products {
 }
 
 router.get('/', async (req: Request, res: Response) => {
-  console.log('products api handler')
   try {
+    console.log('Products get request received')
     let data: Products = await ProductsController.products();
     res.send(data)
   } catch(error: any) {
@@ -41,9 +41,11 @@ interface OneProduct {
 
 router.get('/:product_id', async (req: Request, res: Response) => {
   try {
+    console.log('Request for Product ', req.params.product_id, 'received');
     let data: OneProduct = await ProductsController.oneProduct(req.params.product_id);
     res.send(data);
   } catch (error: any) {
+    console.log('The error is working ________________________');
     let errorMessage = `Unable to retrieve product due to some internal error:, ${error}`
     res.status(500).send(errorMessage);
   }
@@ -77,8 +79,8 @@ interface ProductStyles {
 }
 
 router.get('/:product_id/styles', async (req: Request, res: Response) => {
-  console.log('productStyles')
   try {
+    console.log('Request for styles of product ', req.params.product_id, 'received');
     let data: ProductStyles = await ProductsController.styles(req.params.product_id);
     res.send(data);
   } catch(error) {
@@ -88,10 +90,10 @@ router.get('/:product_id/styles', async (req: Request, res: Response) => {
 });
 
 router.get('/:product_id/related', async (req: Request, res: Response) => {
-  console.log('related');
   try {
+    console.log('Request for produts related to ', req.params.product_id, 'received');
     let data = await ProductsController.related(req.params.product_id);
-    res.send(data.rows);
+    res.send(data);
   } catch(error) {
     let errorMessage = `Unable to retrieve related proucts due to some internal error:, ${error}`
     res.status(500).send(errorMessage);

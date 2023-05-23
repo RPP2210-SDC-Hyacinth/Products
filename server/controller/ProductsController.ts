@@ -20,8 +20,7 @@ const products = async () => {
     console.log('_____Products: ' ,products);
     return products;
   } catch(error: any) {
-    let errorMessage = `Unable to retrieve products due to some internal error:, ${error}`
-    return errorMessage;
+    throw new Error(`Unable to retrieve products do to the following error ${error}`);
   }
 }
 
@@ -43,13 +42,11 @@ interface OneProduct {
 const oneProduct = async (product_id: number) => {
   try {
     let data = await query.getOneProduct(product_id);
-    let product: OneProduct = data.rows;
-    console.log(`_____Product ${product_id}: ` ,product);
+    let product: OneProduct = data.rows[0];
+    console.log(`_____Product ${product_id}: `, product);
     return product;
   } catch(error: any) {
-    let errorMessage = `Unable to retrieve products due to some internal error:, ${error}`
-    console.log(errorMessage);
-    return errorMessage;
+    throw new Error(`Unable to retrieve data for product ${product_id} do to the following error ${error}`);
   }
 }
 
@@ -83,22 +80,26 @@ interface ProductStyles {
 const styles = async (product_id: number) => {
   try {
     let data = await query.getStyles(product_id);
-    let styles: ProductStyles = data.rows;
+    let productStyles: ProductStyles = data.rows;
+    let styles = {
+      'product_id': product_id,
+      'results': productStyles
+    }
     console.log(`_____Styles for Product ${product_id}: `, styles);
     return styles;
   } catch(error) {
-    let errorMessage = `Error retrieving styles: ${error}`;
-    return errorMessage;
+    throw new Error(`Unable to retrieve styles data for product ${product_id} do to the following error ${error}`);
   }
 }
 
 const related = async (product_id: number) => {
   try {
     let data = await query.getRelatedProducts(product_id);
-    let relatedProducts = data.rows;
+    let relatedProducts = data.rows[0]['array_agg'];
     console.log(`_____Related Products for Product ${product_id}: `, relatedProducts);
+    return relatedProducts;
   } catch(error) {
-    console.log('Error retrieving related product');
+    throw new Error(`Unable to retrieve relate products due to this error: ${error}`)
   }
 }
 
