@@ -1,7 +1,3 @@
-import { Response, Request } from 'express';
-const express = require('express');
-const axios = require('axios');
-const router = express.Router();
 const query = require('../database/query');
 
 interface Products {
