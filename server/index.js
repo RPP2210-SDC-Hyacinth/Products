@@ -2,7 +2,7 @@ const express = require('express');
 const axios = require('axios');
 const path = require('path');
 const dotenv = require('dotenv');
-const ProductRoute = require('../dist/routes/Product.js');
+const ProductRoute = require('../dist/routes/productRoutes.js');
 const app = express();
 
 dotenv.config({path: '../.env'});

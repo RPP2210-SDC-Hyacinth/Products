@@ -29,18 +29,17 @@ const pool = new Pool(poolConfig);
 
 const getProducts = async () => {
   try {
-    console.log('trying to query')
-    let result = await pool.query('SELECT * FROM products');
+    console.log('Attempting to retrieve 10 products for');
+    let result = await pool.query('SELECT * FROM products LIMIT 10');
     return result;
   } catch (error: any) {
-    console.dir(error);
-    console.log('Unable to retrieve products:', error.message );
+    throw new Error(`Unable to retrieve products do to the following error ${error}`);
   }
 };
 
 const getOneProduct = async (id: number) => {
   try {
-    console.log('trying to query');
+    console.log('Attempting to retrieve data for: ', id);
     let result = await pool.query(
       `SELECT
        p.id,
@@ -53,20 +52,23 @@ const getOneProduct = async (id: number) => {
       FROM Products p
       JOIN Features f ON p.id = f.product_id
       WHERE p.id = $1
-      GROUP BY p.id`,
+      GROUP BY p.id
+      LIMIT 10`,
       [id]
-    )
+    );
+
     return result;
   } catch(error) {
-    console.log('Unable to retrieve product:', error );
+    throw new Error(`Unable to retrieve data for product ${id} do to the following error ${error}`);
   }
 };
 
 const getStyles = async (id: number) => {
   try {
-    console.log(id);
+    console.log('Attempting to retrieve styles for: ', id);
     let query =
-    `SELECT s.id AS style_id,
+    `SELECT
+    s.id AS style_id,
     s.name,
     s.original_price,
     s.sale_price,
@@ -77,26 +79,29 @@ const getStyles = async (id: number) => {
     LEFT JOIN SKUs sk ON s.id = sk.styleId
     LEFT JOIN Photos p ON s.id = p.styleId
     WHERE s.product_id = $1
-      AND sk.size IS NOT NULL
-    GROUP BY s.id;`;
+      AND sk.id IS NOT NULL
+    GROUP BY s.id
+    LIMIT 10;`;
 
     let result = await pool.query(query, [id]);
     return result;
   } catch(error) {
-    console.log('Unable to retrieve style due to this error:', error );
+    throw new Error(`Unable to retrieve styles data for product ${id} do to the following error ${error}`);
   }
 };
 
 const getRelatedProducts = async (id: number) => {
   try {
+    console.log('Attempting to retrieve related products for: ', id);
     let query =
-    `SELECT json_agg(related_product_id)
+    `SELECT array_agg(related_product_id)
     FROM Related r
-    WHERE current_product_id = $1;`;
+    WHERE current_product_id = $1
+    LIMIT 10;`;
     let result = await pool.query(query, [id]);
     return result;
   } catch(error) {
-    console.log('Unable to retrieve relate products due to this error:', error);
+    throw new Error(`Unable to retrieve relate products due to this error: ${error}`)
   }
 };
 
